@@ -1,0 +1,8 @@
+[package]
+name = "linear_regression"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+blake3 = { version = "1.8", default-features = false }
+winterfell = { version = "0.12", default-features = false }

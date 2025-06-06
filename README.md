@@ -85,7 +85,8 @@ While this demo uses hardcoded public inputs for simplicity, once generalized de
 
 ## How to run: 
 - clone the git repository 
-> git clone https://github.com/agrawalx/On-chain-STARK-framework.git
+```git clone https://github.com/agrawalx/On-chain-STARK-framework.git```
+
 **🧾 1. Deploy the Rust Verifier Contract**
 ```
 cd verifier 

@@ -83,3 +83,18 @@ While this demo uses hardcoded public inputs for simplicity, once generalized de
 
 - This unlocks a huge range of use cases, including ZK gaming, verifiable oracles, proof-of-compute systems, and modular AI inference on-chain — all powered by PolkaVM + AssetHub.
 
+## How to run: 
+```
+
+deploy contract.polkaVM and get RUST_ADDRESS using this command:
+cd verifier 
+RUST_ADDRESS=$(cast send --account dev-account --create "$(xxd -p -c 99999 contract.polkavm)" --json | jq -r .contractAddress)
+replace **rustcontractaddress** in line 14 of call_from_sol.sol and deploy the solidity contract. 
+
+generate proof by using the following in generate_proof directory:
+cargo add winterfell
+cargo run -release 
+serialized proof and pub_inputs will be printed in terminal now you can copy this and send as inputs to the verify function of solidity contract" 
+``` 
+
+**the solidity contract internally calls rust contract and outputs if the proof is valid or not**

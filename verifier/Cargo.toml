@@ -10,8 +10,8 @@ name = "contract"
 path = "src/main.rs"
 
 [profile.release]
-opt-level = "s"
-lto = "fat"
+opt-level = "z"
+lto = true
 codegen-units = 1
 panic = "abort"  # Required for no_std
 strip = true

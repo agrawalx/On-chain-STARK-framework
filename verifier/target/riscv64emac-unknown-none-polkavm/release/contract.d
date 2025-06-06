@@ -1,1 +1,1 @@
-/home/yash/rust-contract-template/target/riscv64emac-unknown-none-polkavm/release/contract: /home/yash/rust-contract-template/src/main.rs
+/home/yash/complete/verifier/target/riscv64emac-unknown-none-polkavm/release/contract: /home/yash/complete/verifier/src/main.rs

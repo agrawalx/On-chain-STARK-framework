@@ -4,13 +4,11 @@ extern crate alloc;
 use static_alloc::Bump;
 
 #[global_allocator]
-static ALLOCATOR: Bump<[u8; 64 * 1024]> = Bump::uninit();
+static ALLOCATOR: Bump<[u8; 32 * 1024]> = Bump::uninit();
 use uapi::{HostFn, HostFnImpl as api, ReturnFlags};
 use winterfell::{verify, AcceptableOptions};
-use core::slice;
 use core::result::Result::{Ok, Err};
 pub use core::{fmt, iter, mem, ops};
-use core::panic::PanicInfo;
 use alloc::vec::Vec; 
 use alloc::vec; 
 

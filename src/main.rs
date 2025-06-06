@@ -133,44 +133,38 @@ pub fn build_linear_regression_trace(
     target_x: BaseElement,
 ) -> TraceTable<BaseElement> {
     let num_samples = sample_x_values.len();
-    
-    // We need at least num_samples + 1 steps (samples + prediction)
-    // Winterfell requires minimum trace length of 8, and trace length must be a power of 2
     let trace_length = (num_samples + 1).next_power_of_two().max(8);
     let trace_width = 4; // slope, intercept, x, y
-    
-    let mut trace = TraceTable::new(trace_width, trace_length);
-    
-    trace.fill(
-        |state| {
-            // Initialize first state with first sample point
-            state[0] = slope;           // slope column
-            state[1] = intercept;       // intercept column
-            state[2] = sample_x_values[0]; // x value
-            state[3] = sample_y_values[0]; // y value
-        },
-        |step, state| {
-            // Keep slope and intercept constant throughout
-            state[0] = slope;
-            state[1] = intercept;
-            
-            if step < num_samples {
-                // Fill with sample data
-                state[2] = sample_x_values[step];
-                state[3] = sample_y_values[step];
-            } else if step == num_samples {
-                // Prediction step
-                state[2] = target_x;
-                state[3] = slope * target_x + intercept;
-            } else {
-                // Padding steps - maintain consistency by repeating the prediction
-                state[2] = target_x;
-                state[3] = slope * target_x + intercept;
-            }
-        },
-    );
-    
-    trace
+
+    // Create a mutable matrix for the trace
+    let mut trace = Vec::new();
+    for _ in 0..trace_width {
+        trace.push(vec![BaseElement::ZERO; trace_length]);
+    }
+
+    // Fill the trace row-by-row with a clear for loop
+    for i in 0..trace_length {
+        // Set the constant slope and intercept for every row
+        trace[0][i] = slope;
+        trace[1][i] = intercept;
+
+        if i < num_samples {
+            // Fill with sample data
+            trace[2][i] = sample_x_values[i];
+            trace[3][i] = sample_y_values[i];
+        } else if i == num_samples {
+            // The prediction step
+            trace[2][i] = target_x;
+            trace[3][i] = slope * target_x + intercept;
+        } else {
+            // Padding steps: repeat the prediction to satisfy constraints
+            trace[2][i] = target_x;
+            trace[3][i] = slope * target_x + intercept;
+        }
+    }
+
+    // Convert the vector-of-vectors to a Winterfell TraceTable
+    TraceTable::init(trace)
 }
 
 /// Linear Regression Prover

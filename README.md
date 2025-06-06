@@ -84,8 +84,11 @@ While this demo uses hardcoded public inputs for simplicity, once generalized de
 - This unlocks a huge range of use cases, including ZK gaming, verifiable oracles, proof-of-compute systems, and modular AI inference on-chain — all powered by PolkaVM + AssetHub.
 
 ## How to run: 
+- clone the git repository 
+> git clone https://github.com/agrawalx/On-chain-STARK-framework.git
 **🧾 1. Deploy the Rust Verifier Contract**
-```cd verifier 
+```
+cd verifier 
 RUST_ADDRESS=$(cast send --account dev-account --create "$(xxd -p -c 99999 contract.polkavm)" --json | jq -r .contractAddress)
 ```
 **🧾 2. Update and Deploy the Solidity Wrapper**

@@ -1,0 +1,11 @@
+/home/yash/rust-contract-template/target/riscv64emac-unknown-none-polkavm/release/deps/static_alloc-52413bf71847a9ed.d: /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/lib.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/bump.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/leaked.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/mod.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/bump.rs
+
+/home/yash/rust-contract-template/target/riscv64emac-unknown-none-polkavm/release/deps/libstatic_alloc-52413bf71847a9ed.rlib: /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/lib.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/bump.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/leaked.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/mod.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/bump.rs
+
+/home/yash/rust-contract-template/target/riscv64emac-unknown-none-polkavm/release/deps/libstatic_alloc-52413bf71847a9ed.rmeta: /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/lib.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/bump.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/leaked.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/mod.rs /home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/bump.rs
+
+/home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/lib.rs:
+/home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/bump.rs:
+/home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/leaked.rs:
+/home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/mod.rs:
+/home/yash/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/static-alloc-0.2.5/src/unsync/bump.rs:

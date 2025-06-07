@@ -106,3 +106,7 @@ RUST_ADDRESS=$(cast send --account dev-account --create "$(xxd -p -c 99999 contr
 - Use the generated proofBytes,publicInputBytes and rust contract address as arguments to the Solidity contract’s verify() function:
 
 **the solidity contract internally calls rust contract and outputs if the proof is valid or not**
+
+## Challenges we faced:
+- The contract.polkavm file size comes to about 183.7 Kb. First we tried deploying it through cast but we faced Arguement too long. Then we tried deploying it       using JS script in which we faced  error: { code: -32003, message: 'max initcode size exceeded' }
+

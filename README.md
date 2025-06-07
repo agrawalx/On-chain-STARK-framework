@@ -92,17 +92,17 @@ While this demo uses hardcoded public inputs for simplicity, once generalized de
 cd verifier 
 RUST_ADDRESS=$(cast send --account dev-account --create "$(xxd -p -c 99999 contract.polkavm)" --json | jq -r .contractAddress)
 ```
-**🧾 2. Update and Deploy the Solidity Wrapper**
-- Open call_from_sol.sol and update line 14 to use the deployed Rust contract address:**
 
-**🛠️ 3. Generate the STARK Proof**
+**🛠️ 2. Generate the STARK Proof**
 - Navigate to the generate_proof directory and add Winterfell as a dependency:
 `cargo add winterfell`
 - Then run the proof generation script in release mode:
 `cargo run -release `
 > This will print the serialized STARK proof and public inputs to the terminal. 
 
-**✅ 4. Verify the Proof via Solidity Contract**
-- Use the generated proofBytes and publicInputBytes as arguments to the Solidity contract’s verify() function:
+
+**✅ 3. deploy and Verify the Proof via Solidity Contract**
+- deploy the solidity contract on a testnet 
+- Use the generated proofBytes,publicInputBytes and rust contract address as arguments to the Solidity contract’s verify() function:
 
 **the solidity contract internally calls rust contract and outputs if the proof is valid or not**

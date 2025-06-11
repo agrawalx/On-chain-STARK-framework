@@ -6,18 +6,32 @@ use static_alloc::Bump;
 #[global_allocator]
 static ALLOCATOR: Bump<[u8; 32 * 1024]> = Bump::uninit();
 use uapi::{HostFn, HostFnImpl as api, ReturnFlags};
-use winterfell::{verify, AcceptableOptions};
+use winter_verifier::{verify_until_step3, AcceptableOptions, Proof};
 use core::result::Result::{Ok, Err};
 pub use core::{fmt, iter, mem, ops};
 use alloc::vec::Vec; 
 use alloc::vec; 
 
-use winterfell::{
-    math::{fields::f128::BaseElement, FieldElement, ToElements},
-    crypto::{hashers::Blake3_256, DefaultRandomCoin, MerkleTree}, 
-    Air, AirContext, Assertion, EvaluationFrame, ProofOptions, TraceInfo, 
-    TransitionConstraintDegree
+// From winter-math
+use winter_math::{
+    fields::f128::BaseElement,
+    FieldElement,
+    ToElements,
 };
+
+// From winter-crypto
+use winter_crypto::{
+    hashers::Blake3_256,
+    DefaultRandomCoin,
+    MerkleTree,
+};
+
+// From winter-air
+use winter_air::{
+    Air, AirContext, Assertion, EvaluationFrame, TransitionConstraintDegree, TraceInfo, ProofOptions
+};
+
+
 
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! {
@@ -60,7 +74,7 @@ pub extern "C" fn call() {
 }
 
 fn verify_stark_proof(proof_bytes: &[u8], pub_inputs_bytes: &[u8]) -> bool {
-    let proof = match winterfell::Proof::from_bytes(proof_bytes) {
+    let proof = match Proof::from_bytes(proof_bytes) {
         Ok(p) => p,
         Err(_) => return false,
     };
@@ -100,7 +114,7 @@ fn verify_stark_proof(proof_bytes: &[u8], pub_inputs_bytes: &[u8]) -> bool {
         sample_y_values: sample_y,
     };
 
-    verify::<
+    verify_until_step3::<
         LinearRegressionAir,
         Blake3_256<BaseElement>,
         DefaultRandomCoin<Blake3_256<BaseElement>>,

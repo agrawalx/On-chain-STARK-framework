@@ -27,7 +27,11 @@ polkavm-derive = { version = "0.19.0" }
 uapi = { package = "pallet-revive-uapi", git = "https://github.com/paritytech/polkadot-sdk.git", rev = "38d2fa859861005157ccb249dca1378f015e0b06", default-features = false, features = ["unstable-hostfn"] }
 
 #
-winterfell = { version = "0.12.0", default-features = false } 
+winter-verifier = { path = "../../winterfell-0.12.0/verifier", default-features = false } 
 static-alloc = "0.2.5"
-
-
+winter-air = { path = "../../winterfell-0.12.0/air", default-features = false }
+winter-crypto = { path = "../../winterfell-0.12.0/crypto", default-features = false  }
+winter-math = { path = "../../winterfell-0.12.0/math", default-features = false  }
+winter-fri = { path = "../../winterfell-0.12.0/fri", default-features = false }
+winter-utils = { path = "../../winterfell-0.12.0/utils/core", default-features = false  }
+winter-prover = { path = "../../winterfell-0.12.0/prover", default-features = false  }

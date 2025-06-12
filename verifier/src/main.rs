@@ -73,46 +73,13 @@ pub extern "C" fn call() {
     api::return_value(ReturnFlags::empty(), &output);
 }
 
-fn verify_stark_proof(proof_bytes: &[u8], pub_inputs_bytes: &[u8]) -> bool {
-    let proof = match Proof::from_bytes(proof_bytes) {
-        Ok(p) => p,
-        Err(_) => return false,
+fn verify_stark_proof(proof_bytes: &[u8], _pub_inputs_bytes: &[u8]) -> bool {
+    let proof = match decode_proof(proof_bytes) {
+        Some(p) => p,
+        None => return false,
     };
-    
-    // let pub_inputs = match bincode::deserialize(pub_inputs_bytes) {
-    //     Ok(i) => i,
-    //     Err(_) => return false,
-    // };
-    // Perform verification
-    // Secret parameters (not revealed in proof)
-    let slope = BaseElement::new(3);        // m = 3
-    let intercept = BaseElement::new(7);    // b = 7
-    
-    // Public sample data points
-    let sample_x = vec![
-        BaseElement::new(1),   // x = 1
-        BaseElement::new(2),   // x = 2  
-        BaseElement::new(4),   // x = 4
-        BaseElement::new(5),   // x = 5
-    ];
-    
-    let sample_y = vec![
-        BaseElement::new(10),  // y = 3*1 + 7 = 10
-        BaseElement::new(13),  // y = 3*2 + 7 = 13
-        BaseElement::new(19),  // y = 3*4 + 7 = 19
-        BaseElement::new(22),  // y = 3*5 + 7 = 22
-    ];
-    
-    // Target prediction
-    let target_x = BaseElement::new(6);
-    let expected_y = slope * target_x + intercept; // 3*6 + 7 = 25
 
-    let pub_inputs = LinearRegressionInputs {
-        x_value: target_x,
-        predicted_y: expected_y,
-        sample_x_values: sample_x,
-        sample_y_values: sample_y,
-    };
+    let pub_inputs = build_public_inputs();
 
     verify_until_step3::<
         LinearRegressionAir,
@@ -233,3 +200,32 @@ impl Air for LinearRegressionAir {
     }
 }
 
+fn decode_proof(proof_bytes: &[u8]) -> Option<Proof> {
+    Proof::from_bytes(proof_bytes).ok()
+}
+
+fn build_public_inputs() -> LinearRegressionInputs {
+    let slope = BaseElement::new(3);
+    let intercept = BaseElement::new(7);
+    let sample_x = vec![
+        BaseElement::new(1),
+        BaseElement::new(2),
+        BaseElement::new(4),
+        BaseElement::new(5),
+    ];
+    let sample_y = vec![
+        BaseElement::new(10),
+        BaseElement::new(13),
+        BaseElement::new(19),
+        BaseElement::new(22),
+    ];
+    let target_x = BaseElement::new(6);
+    let expected_y = slope * target_x + intercept;
+
+    LinearRegressionInputs {
+        x_value: target_x,
+        predicted_y: expected_y,
+        sample_x_values: sample_x,
+        sample_y_values: sample_y,
+    }
+}
